@@ -12,12 +12,12 @@ RUN wget --no-check-certificate http://repos.fedorapeople.org/repos/dchen/apache
 RUN sed -i s/\$releasever/6/g /etc/yum.repos.d/epel-apache-maven.repo
 RUN yum install -y apache-maven
 ENV JAVA_HOME /etc/alternatives/jre
-RUN git clone https://github.com/taiyakiyasan/tutorial-aws-ecs-app.git /var/local/mynavi-sample-aws-ecs
-RUN mvn install -f /var/local/mynavi-sample-aws-ecs/pom.xml
+RUN git clone https://github.com/taiyakiyasan/tutorial-aws-ecs-app.git /var/local/sample-aws-ecs
+RUN mvn install -f /var/local/sample-aws-ecs/pom.xml
 
 RUN cp /etc/localtime /etc/localtime.org
 RUN ln -sf  /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 
 EXPOSE 8080
 
-CMD java -jar -Dspring.profiles.active=production /var/local/mynavi-sample-aws-ecs/backend/target/mynavi-sample-aws-ecs-backend-0.0.1-SNAPSHOT.jar
+CMD java -jar -Dspring.profiles.active=production /var/local/sample-aws-ecs/backend/target/sample-aws-ecs-backend-0.0.1-SNAPSHOT.jar
